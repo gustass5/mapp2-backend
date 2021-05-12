@@ -1,31 +1,22 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { Note, CreateNoteInput } from 'src/graphql';
+import { NoteDocument } from './note.schema';
 
 @Injectable()
 export class NotebookService {
-	private notes: Note[] = [
-		{
-			id: 0,
-			headline: 'Test0',
-			content: 'content0',
-			creationDate: '2021-05-11T20:22:16Z'
-		},
-		{
-			id: 1,
-			headline: 'Test1',
-			content: 'conten1',
-			creationDate: '2021-05-11T20:22:16Z'
-		}
-	];
+	constructor(@InjectModel(Note.name) private noteModel: Model<NoteDocument>) {}
 
-	all() {
-		return this.notes;
+	async all(): Promise<Note[]> {
+		return this.noteModel.find().exec();
 	}
 
-	create(note: CreateNoteInput): Note {
-		const newNote = { id: this.notes.length, ...note };
-		this.notes = [...this.notes, newNote];
+	async create(input: CreateNoteInput): Promise<Note> {
+		const newNoteId = await this.noteModel.find().count();
+		const newNote = { id: newNoteId.toString(), ...input };
+		const createdNote = new this.noteModel(newNote);
 
-		return newNote;
+		return createdNote.save();
 	}
 }

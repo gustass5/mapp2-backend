@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { NotebookModule } from 'src/notebook/notebook.module';
@@ -6,6 +7,7 @@ import { NotebookModule } from 'src/notebook/notebook.module';
 
 @Module({
 	imports: [
+		MongooseModule.forRoot('mongodb://localhost/mapp2'),
 		NotebookModule,
 		// PluginsModule,
 		GraphQLModule.forRoot({

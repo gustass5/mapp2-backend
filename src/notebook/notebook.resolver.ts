@@ -12,8 +12,8 @@ export class NotebookResolver {
 	}
 
 	@Mutation('createNote')
-	async createNote(@Args('input') noteData: CreateNoteInput): Promise<Note> {
-		const newNote = await this.notebookService.create(noteData);
+	async createNote(@Args('input') input: CreateNoteInput): Promise<Note> {
+		const newNote = await this.notebookService.create(input);
 		return newNote;
 	}
 }

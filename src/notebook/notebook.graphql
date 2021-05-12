@@ -7,7 +7,7 @@ type Mutation {
 }
 
 type Note {
-	id: Int!
+	id: String!
 	headline: String
 	content: String
 	creationDate: String

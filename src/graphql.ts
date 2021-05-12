@@ -22,7 +22,7 @@ export abstract class IMutation {
 }
 
 export class Note {
-    id: number;
+    id: string;
     headline?: string;
     content?: string;
     creationDate?: string;

@@ -6,6 +6,7 @@ import { NotebookModule } from 'src/notebook/notebook.module';
 import { AuthModule } from 'src/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from 'src/users/users.module';
+import { GithubModule } from 'src/github/github.module';
 // import { PluginsModule } from 'src/plugins/plugins.module';
 
 @Module({
@@ -13,6 +14,7 @@ import { UsersModule } from 'src/users/users.module';
 		ConfigModule.forRoot({ isGlobal: true }),
 		MongooseModule.forRoot('mongodb://localhost/mapp2'),
 		NotebookModule,
+		GithubModule,
 		AuthModule,
 		UsersModule,
 		// PluginsModule,

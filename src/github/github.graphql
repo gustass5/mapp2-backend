@@ -1,0 +1,33 @@
+type Query {
+	repositories: [Repository]
+	# pullRequests(repositoryName: String): [PullRequest]
+}
+
+type Repository {
+	name: String
+	description: String
+	owner: String
+	private: Boolean
+	pullRequests: [PullRequest]
+}
+
+type PullRequest {
+	title: String
+	author: String
+	body: String
+	serialNumber: Int
+	# Add proper type for state
+	state: String
+	isDraft: String
+	createdAt: String
+	updatedAt: String
+	mergedAt: String
+	closedAt: String
+	comments: [Comment]
+}
+
+type Comment {
+	author: String
+	body: String
+	createdAt: String
+}

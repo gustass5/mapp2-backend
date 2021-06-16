@@ -6,7 +6,7 @@ export type NoteDocument = Note & Document;
 @Schema()
 export class Note {
 	@Prop()
-	id: string;
+	id: number;
 
 	@Prop()
 	headline: string;
@@ -16,6 +16,12 @@ export class Note {
 
 	@Prop()
 	creationDate: string;
+
+	@Prop()
+	updateDate: string;
+
+	@Prop()
+	deleted: boolean;
 }
 
 export const NoteSchema = SchemaFactory.createForClass(Note);

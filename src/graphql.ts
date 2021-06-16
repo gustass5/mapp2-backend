@@ -7,10 +7,12 @@
 
 /* tslint:disable */
 /* eslint-disable */
-export class CreateNoteInput {
+export class NoteInput {
+    id?: number;
     headline: string;
     content: string;
-    creationDate: string;
+    creationDate?: string;
+    updateDate?: string;
 }
 
 export abstract class IQuery {
@@ -48,7 +50,11 @@ export class Comment {
 }
 
 export abstract class IMutation {
-    abstract createNote(input: CreateNoteInput): Note | Promise<Note>;
+    abstract createNote(input: NoteInput): Note | Promise<Note>;
+
+    abstract updateNote(input: NoteInput): Note | Promise<Note>;
+
+    abstract deleteNote(id?: number): Note | Promise<Note>;
 }
 
 export class Note {
@@ -56,4 +62,5 @@ export class Note {
     headline?: string;
     content?: string;
     creationDate?: string;
+    updateDate?: string;
 }

@@ -3,7 +3,9 @@ type Query {
 }
 
 type Mutation {
-	createNote(input: CreateNoteInput!): Note!
+	createNote(input: NoteInput!): Note!
+	updateNote(input: NoteInput!): Note!
+	deleteNote(id: Int): Note!
 }
 
 type Note {
@@ -11,10 +13,13 @@ type Note {
 	headline: String
 	content: String
 	creationDate: String
+	updateDate: String
 }
 
-input CreateNoteInput {
+input NoteInput {
+	id: Int
 	headline: String!
 	content: String!
-	creationDate: String!
+	creationDate: String
+	updateDate: String
 }

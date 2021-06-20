@@ -12,6 +12,10 @@ export class NotebookService {
 		return this.noteModel.find({ deleted: false }).exec();
 	}
 
+	async getSingle(id: number): Promise<Note[]> {
+		return this.noteModel.find({ id, deleted: false }).exec();
+	}
+
 	async create(input: NoteInput): Promise<Note> {
 		const newNoteId = await this.noteModel.find().count();
 		const newNote = { id: newNoteId, deleted: false, ...input };

@@ -1,5 +1,5 @@
 type Query {
-	notes(id: String): [Note]
+	notes(id: Int): [Note]
 }
 
 type Mutation {

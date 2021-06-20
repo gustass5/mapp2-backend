@@ -10,7 +10,10 @@ export class NotebookResolver {
 
 	@Query('notes')
 	@UseGuards(GqlAuthGuard)
-	async getNotes(): Promise<Note[]> {
+	async getNotes(@Args('id') id: number): Promise<Note[]> {
+		if (id !== undefined) {
+			return await this.notebookService.getSingle(id);
+		}
 		return await this.notebookService.all();
 	}
 

@@ -18,6 +18,8 @@ export class NoteInput {
 export abstract class IQuery {
     abstract repositories(): Repository[] | Promise<Repository[]>;
 
+    abstract pullRequests(repositoryName: string): PullRequest[] | Promise<PullRequest[]>;
+
     abstract notes(id?: number): Note[] | Promise<Note[]>;
 }
 

@@ -1,6 +1,6 @@
 type Query {
 	repositories: [Repository]
-	# pullRequests(repositoryName: String): [PullRequest]
+	pullRequests(repositoryName: String!): [PullRequest]
 }
 
 type Repository {

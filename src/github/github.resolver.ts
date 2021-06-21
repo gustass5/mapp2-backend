@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
-import { Query, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
-import { Repository } from 'src/graphql';
+import { PullRequest, Repository } from 'src/graphql';
 import { GithubService } from './github.service';
 
 @Resolver()
@@ -26,6 +26,24 @@ export class GithubResolver {
 		}));
 
 		return processedRepositories as Repository[];
+	}
+
+	@Query('pullRequests')
+	@UseGuards(GqlAuthGuard)
+	async getPullRequest(
+		@Args('repositoryName') repositoryName: string
+	): Promise<PullRequest[]> {
+		const repositories = await this.githubService.getRepositories();
+
+		const pullRequests = await this.githubService.getRepositoryPullRequests(
+			repositories
+				.filter(repository => repository.name === repositoryName)[0]
+				.pulls_url.split('{')[0]
+		);
+
+		return pullRequests.map(
+			async pullRequest => await this.processPullRequest(pullRequest)
+		);
 	}
 
 	async processPullRequest(pullRequest) {
